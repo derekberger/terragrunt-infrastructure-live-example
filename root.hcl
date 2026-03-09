@@ -39,7 +39,7 @@ remote_state {
   backend = "s3"
   config = {
     encrypt        = true
-    bucket         = get_env("TG_STACKS_BUCKET_PREFIX")
+    bucket         = "${get_env("TG_STACKS_BUCKET_PREFIX", "")}-tf-state-${local.account_name}-${local.aws_region}"
     key            = "${path_relative_to_include()}/tf.tfstate"
     region         = local.aws_region
     dynamodb_table = "tf-locks"
